@@ -1,0 +1,10 @@
+@startuml
+boundary RecommendedTopicUI
+
+control RecommendedTopicController
+
+entity RecommendedTopic
+entity User
+
+left to right direction
+@enduml

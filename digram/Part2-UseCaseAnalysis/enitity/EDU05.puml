@@ -1,0 +1,25 @@
+@startuml
+
+class 报告 {
+  -reportId: 字符串
+  -userId: 字符串
+  -reportType: 报告类型
+  -content: 字符串
+  +generateReport(): 报告
+  +downloadReport(): 布尔
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +generateReport(): 报告
+  +downloadReport(reportId: 字符串): 布尔
+}
+
+报告 "1" -- "*" 用户 : "由...生成或下载"
+
+@enduml

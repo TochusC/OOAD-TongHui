@@ -1,0 +1,26 @@
+@startuml
+
+class 评估 {
+  -assessmentId: 字符串
+  -userId: 字符串
+  -courseId: 字符串
+  -score: 浮点数
+  -feedback: 字符串
+  +submitAssessment(): 布尔
+  +getAssessment(): 评估
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +submitAssessment(courseId: 字符串): 布尔
+  +getAssessment(assessmentId: 字符串): 评估
+}
+
+评估 "1" -- "*" 用户 : "由...提交或获取"
+
+@enduml

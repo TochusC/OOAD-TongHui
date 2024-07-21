@@ -1,0 +1,46 @@
+@startuml
+
+class 课程 {
+  -courseId: 字符串
+  -courseName: 字符串
+  -description: 字符串
+  -instructorId: 字符串
+  -startDate: 日期
+  -endDate: 日期
+  +enrollCourse(): 布尔
+  +updateCourse(): 布尔
+  +listCourses(): 课程列表
+}
+
+class 教师 {
+  -instructorId: 字符串
+  -name: 字符串
+  -email: 字符串
+  -phoneNumber: 字符串
+  +assignCourse(courseId: 字符串): 布尔
+  +getAssignedCourses(): 课程列表
+}
+
+class 学生 {
+  -studentId: 字符串
+  -name: 字符串
+  -email: 字符串
+  -enrolledCourses: 课程列表
+  +enrollCourse(courseId: 字符串): 布尔
+  +dropCourse(courseId: 字符串): 布尔
+}
+
+class 课程材料 {
+  -materialId: 字符串
+  -courseId: 字符串
+  -title: 字符串
+  -content: 字符串
+  +uploadMaterial(): 布尔
+  +downloadMaterial(): 布尔
+}
+
+课程 "1" -- "*" 教师 : "由...授课"
+课程 "1" -- "*" 学生 : "有...参与"
+课程 "1" -- "*" 课程材料 : "包含"
+
+@enduml

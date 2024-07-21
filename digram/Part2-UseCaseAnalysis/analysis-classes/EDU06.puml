@@ -1,0 +1,13 @@
+@startuml
+boundary CourseManagementUI
+boundary CourseServiceAPI
+
+control CourseManagementController
+
+entity Course
+entity Instructor
+entity Student
+entity CourseMaterial
+
+left to right direction
+@enduml

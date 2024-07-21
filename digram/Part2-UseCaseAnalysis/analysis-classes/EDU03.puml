@@ -1,0 +1,10 @@
+@startuml
+boundary AssessmentUI
+
+control AssessmentController
+
+entity Assessment
+entity User
+
+left to right direction
+@enduml

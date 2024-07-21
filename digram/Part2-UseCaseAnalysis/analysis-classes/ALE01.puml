@@ -1,0 +1,11 @@
+@startuml
+boundary MessageManagerUI
+boundary MessageServiceAPI
+
+control MessageController
+
+entity Message
+entity User
+
+left to right direction
+@enduml

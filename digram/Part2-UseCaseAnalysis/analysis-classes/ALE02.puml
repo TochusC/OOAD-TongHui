@@ -1,0 +1,11 @@
+@startuml
+boundary PersonalInfoManagerUI
+boundary PersonalInfoServiceAPI
+
+control PersonalInfoController
+
+entity PersonalInfo
+entity User
+
+left to right direction
+@enduml

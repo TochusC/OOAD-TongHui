@@ -1,0 +1,34 @@
+@startuml
+
+left to right direction
+
+' 定义接口
+interface EducationAPI {
+  + manageCourse()
+  + viewLearningProgress()
+  + viewStudyReport()
+  + viewSimilarQuestions()
+  + viewRecommendedTopics()
+}
+
+' 实现接口
+package com.education {
+
+  class EducationSubsystem {
+    - courseManagement
+    - learningProgress
+    - studyReport
+    - similarQuestion
+    - recommendedTopic
+    + manageCourse()
+    + viewLearningProgress()
+    + viewStudyReport()
+    + viewSimilarQuestions()
+    + viewRecommendedTopics()
+  }
+}
+
+
+' 关系
+EducationAPI -- EducationSubsystem
+@enduml

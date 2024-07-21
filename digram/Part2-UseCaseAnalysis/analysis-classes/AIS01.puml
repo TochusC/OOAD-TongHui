@@ -1,0 +1,10 @@
+@startuml
+boundary AIAssistantUI
+
+control AIAssistantController
+
+entity AIAssistant
+entity UserInteraction
+
+left to right direction
+@enduml

@@ -1,0 +1,115 @@
+@startuml
+left to right direction
+
+boundary ReportUI
+boundary AssessmentUI
+boundary AIAssistantUI
+boundary AccountManagerUI
+boundary MessageManagerUI
+boundary SimilarQuestionUI
+boundary CourseManagementUI
+boundary LearningProgressUI
+boundary RecommendedTopicUI
+boundary PersonalInfoManagerUI
+
+boundary CourseServiceAPI
+boundary AccountServiceAPI
+boundary MessageServiceAPI
+boundary LearningProgressAPI
+boundary PersonalInfoServiceAPI
+
+control ReportController
+control MessageController
+control AccountController
+control AssessmentController
+control AIAssistantController
+control PersonalInfoController
+control SimilarQuestionController
+control RecommendedTopicController
+control LearningProgressController
+control CourseManagementController
+
+entity Role
+entity Course
+entity Report
+entity Message
+entity Student
+entity Account
+entity Assessment
+entity AIAssistant
+entity PersonalInfo
+entity AccountStatus
+entity CourseMaterial
+entity UserInteraction
+entity SimilarQuestion
+entity ExistingQuestion
+entity RecommendedTopic
+entity LearningProgress
+
+ReportUI --> ReportController
+AssessmentUI --> AssessmentController
+AIAssistantUI --> AIAssistantController
+AccountManagerUI --> AccountController
+MessageManagerUI --> MessageController
+SimilarQuestionController --> ExistingQuestion
+AccountController --> AccountStatus
+CourseManagementController --> CourseMaterial
+CourseManagementController --> Course
+SimilarQuestionUI --> SimilarQuestionController
+CourseManagementUI --> CourseManagementController
+CourseServiceAPI --> CourseManagementController
+LearningProgressUI --> LearningProgressController
+RecommendedTopicUI --> RecommendedTopicController
+PersonalInfoManagerUI --> PersonalInfoController
+
+ReportController --> Report
+ReportController --> Student
+ReportController --> LearningProgressAPI
+MessageController --> PersonalInfoServiceAPI
+RecommendedTopicController --> Student
+MessageController --> Message
+AccountController --> Account
+AssessmentController --> Assessment
+AIAssistantController --> AIAssistant
+PersonalInfoController --> PersonalInfo
+SimilarQuestionController --> SimilarQuestion
+RecommendedTopicController --> RecommendedTopic
+LearningProgressController --> LearningProgress
+
+
+AccountServiceAPI --> AccountController
+MessageServiceAPI --> MessageController
+LearningProgressAPI --> LearningProgressController
+
+PersonalInfoServiceAPI --> PersonalInfoController
+
+
+Account --> Role
+AIAssistantController --> UserInteraction
+
+LearningProgressController --> CourseServiceAPI
+AssessmentController --> CourseServiceAPI
+AIAssistantController --> PersonalInfoServiceAPI
+SimilarQuestionController --> CourseServiceAPI
+
+
+entity MentalHealthAssessment
+boundary MentalHealthAssessmentAPI
+boundary MoodLevelUI
+boundary MoodLevelAPI
+control MoodLevelController
+entity MoodLevel
+control MentalHealthAssessmentController
+
+MentalHealthAssessmentAPI --> MentalHealthAssessmentController
+MoodLevelUI --> MoodLevelController
+MoodLevelController --> MoodLevel
+MentalHealthAssessmentController --> MentalHealthAssessment
+MentalHealthAssessmentController --> Student
+MoodLevelController --> MoodLevelAPI
+MoodLevelAPI --> MoodLevelController
+MoodLevelController --> Student
+MentalHealthAssessmentController --> MentalHealthAssessmentAPI
+MentalHealthAssessmentAPI --> MentalHealthAssessmentController
+
+@enduml

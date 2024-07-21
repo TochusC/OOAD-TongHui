@@ -1,0 +1,68 @@
+@startuml
+
+package 部署制品图{
+' 定义组件
+    component AIAssistantPackage {
+      component EmoLLMPackage
+      component ERNIEPackage
+    }
+
+    component MentalHealthPackage {
+      component MentalHealthAPI
+      component MentalHealthSubsystem
+    }
+
+    component PreventionPackage {
+      component WarningMessageAPI
+      component PreventionSubsystem
+    }
+
+    component EducationPackage {
+      component EducationAPI
+      component EducationSubsystem
+    }
+
+    component SystemPackage {
+      component UILayer
+      component ControllerLayer
+      component ServiceLayer
+      component EntityLayer
+      component SystemServiceAPI
+    }
+
+    ' 定义依赖关系
+    AIAssistantPackage --> MentalHealthSubsystem
+    AIAssistantPackage --> PreventionSubsystem
+    AIAssistantPackage -> EducationSubsystem
+    AIAssistantPackage ---> SystemPackage
+
+    EmoLLMPackage -> AIAssistantPackage
+    ERNIEPackage -> AIAssistantPackage
+
+    UILayer -> ControllerLayer
+    ControllerLayer -> ServiceLayer
+    ServiceLayer -> EntityLayer
+
+    MentalHealthSubsystem -> MentalHealthAPI
+    PreventionSubsystem -> WarningMessageAPI
+    EducationSubsystem -> EducationAPI
+    SystemPackage -> SystemServiceAPI
+
+    ' 定义接口实现
+    MentalHealthPackage -> MentalHealthAPI
+    PreventionPackage -> WarningMessageAPI
+    EducationPackage -> EducationAPI
+    ServiceLayer -> SystemServiceAPI
+
+    ' 定义边界
+    SystemPackage <. UILayer
+    SystemPackage <.. ControllerLayer
+    SystemPackage <.. ServiceLayer
+    SystemPackage <.. EntityLayer
+
+    ' 定义子系统边界
+    MentalHealthSubsystem <. MentalHealthPackage
+    PreventionSubsystem <. PreventionPackage
+    EducationSubsystem <. EducationPackage
+}
+@enduml

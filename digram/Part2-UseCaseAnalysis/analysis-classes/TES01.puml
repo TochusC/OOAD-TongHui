@@ -1,0 +1,11 @@
+@startuml
+boundary MentalHealthAssessmentUI
+boundary MentalHealthAssessmentAPI
+
+control MentalHealthAssessmentController
+
+entity MentalHealthAssessment
+entity User
+
+left to right direction
+@enduml

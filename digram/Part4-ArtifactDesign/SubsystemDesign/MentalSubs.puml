@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+' 定义接口
+interface MentalHealthAPI {
+  + manageMentalHealth()
+  + viewMentalHealth()
+  + viewMoodLevel()
+}
+
+' 实现接口
+package com.mentalhealth {
+
+  class MentalHealthSubsystem {
+    - mentalHealthAssessment
+    - moodLevel
+    + manageMentalHealth()
+    + viewMentalHealth()
+    + viewMoodLevel()
+  }
+}
+
+' 关系
+MentalHealthAPI -- MentalHealthSubsystem
+@enduml

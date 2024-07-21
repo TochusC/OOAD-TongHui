@@ -1,0 +1,30 @@
+@startuml
+hide footbox
+
+actor User
+boundary CourseManagementUI
+boundary CourseServiceAPI
+
+control CourseManagementController
+
+entity Course
+entity CourseMaterial
+
+User -> CourseManagementUI : Create Course
+CourseManagementUI -> CourseManagementController : createCourseRequest(courseDetails)
+CourseManagementController -> CourseServiceAPI : createCourse(courseDetails)
+CourseServiceAPI -> Course : new Course(courseDetails)
+Course -> CourseMaterial : createCourseMaterials()
+CourseServiceAPI -> CourseManagementController : courseCreated(courseId)
+CourseManagementController -> CourseManagementUI : displayCourseCreationSuccess(courseId)
+CourseManagementUI -> User : Course Created Successfully
+
+User -> CourseManagementUI : Manage Course Materials
+CourseManagementUI -> CourseManagementController : manageMaterialsRequest(courseId, materialDetails)
+CourseManagementController -> CourseServiceAPI : updateCourseMaterials(courseId, materialDetails)
+CourseServiceAPI -> CourseMaterial : updateMaterials(materialDetails)
+CourseServiceAPI -> CourseManagementController : materialsUpdated()
+CourseManagementController -> CourseManagementUI : displayMaterialsUpdateSuccess()
+CourseManagementUI -> User : Course Materials Updated Successfully
+
+@enduml

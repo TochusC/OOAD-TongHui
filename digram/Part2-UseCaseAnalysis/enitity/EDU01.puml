@@ -1,0 +1,36 @@
+@startuml
+
+class 学习进度 {
+  -progressId: 字符串
+  -userId: 字符串
+  -courseId: 字符串
+  -progress: 浮点数
+  -lastUpdated: 日期时间
+  +updateProgress(): 布尔
+  +getProgress(): 学习进度
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +getProgress(courseId: 字符串): 学习进度
+}
+
+class 课程 {
+  -courseId: 字符串
+  -courseName: 字符串
+  -description: 字符串
+  -instructorId: 字符串
+  -startDate: 日期
+  -endDate: 日期
+  +listCourses(): 课程列表
+}
+
+学习进度 "1" -- "*" 用户 : "由...查看"
+学习进度 "1" -- "*" 课程 : "关联"
+
+@enduml

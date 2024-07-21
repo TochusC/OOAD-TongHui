@@ -1,0 +1,12 @@
+@startuml
+boundary LearningProgressUI
+boundary LearningProgressAPI
+
+control LearningProgressController
+
+entity LearningProgress
+entity User
+entity Course
+
+left to right direction
+@enduml

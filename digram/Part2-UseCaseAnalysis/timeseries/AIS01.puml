@@ -1,0 +1,21 @@
+@startuml
+actor User
+
+boundary AIAssistantUI
+
+control AIAssistantController
+
+entity AIAssistant
+entity UserInteraction
+
+User -> AIAssistantUI : Interact with AI Assistant
+AIAssistantUI -> AIAssistantController : initiateInteraction(userId)
+AIAssistantController -> AIAssistant : initializeInteraction(userId)
+AIAssistant -> UserInteraction : retrieveUserInteractionHistory(userId)
+UserInteraction -> User : gatherInteractionPreferences()
+UserInteraction -> AIAssistantController : sendInteractionPreferences(preferences)
+AIAssistantController -> AIAssistant : setInteractionPreferences(preferences)
+AIAssistant -> AIAssistantController : processInteraction(preferences)
+AIAssistantController -> AIAssistantUI : displayInteractionResult(result)
+AIAssistantUI -> User : Show Interaction Result
+@enduml

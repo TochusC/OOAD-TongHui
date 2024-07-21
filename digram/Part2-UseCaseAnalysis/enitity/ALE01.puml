@@ -1,0 +1,29 @@
+@startuml
+
+class 消息 {
+  -messageId: 字符串
+  -senderId: 字符串
+  -receiverId: 字符串
+  -content: 字符串
+  -timestamp: 日期时间
+  -status: 消息状态
+  +sendMessage(): 布尔
+  +readMessage(): 布尔
+  +deleteMessage(): 布尔
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 用户状态
+  +sendMessage(receiverId: 字符串, content: 字符串): 布尔
+  +receiveMessage(messageId: 字符串): 布尔
+  +deleteMessage(messageId: 字符串): 布尔
+}
+
+消息 "1" -- "*" 用户 : "由...发送或接收"
+
+@enduml

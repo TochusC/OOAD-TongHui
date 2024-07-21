@@ -1,0 +1,51 @@
+@startuml
+hide footbox
+
+actor User
+boundary AccountManagerUI
+boundary AccountServiceAPI
+
+control AccountController
+
+entity Account
+entity Role
+entity AccountStatus
+
+User -> AccountManagerUI : Register
+AccountManagerUI -> AccountController : registerRequest()
+AccountController -> AccountServiceAPI : createAccount()
+AccountServiceAPI -> Account : new Account()
+Account -> Role : assignRole()
+Account -> AccountStatus : setStatusCreated()
+AccountServiceAPI -> AccountController : accountCreated()
+AccountController -> AccountManagerUI : registrationSuccess()
+AccountManagerUI -> User : Registration Successful
+
+User -> AccountManagerUI : Login
+AccountManagerUI -> AccountController : loginRequest()
+AccountController -> AccountServiceAPI : authenticateAccount()
+AccountServiceAPI -> Account : verifyCredentials()
+Account -> AccountStatus : checkStatus()
+AccountServiceAPI -> AccountController : authenticationResult()
+AccountController -> AccountManagerUI : loginResponse()
+AccountManagerUI -> User : Login Successful
+
+User -> AccountManagerUI : Logout
+AccountManagerUI -> AccountController : logoutRequest()
+AccountController -> AccountServiceAPI : logoutAccount()
+AccountServiceAPI -> Account : updateLastLogin()
+Account -> AccountStatus : setStatusInactive()
+AccountServiceAPI -> AccountController : logoutSuccess()
+AccountController -> AccountManagerUI : logoutResponse()
+AccountManagerUI -> User : Logout Successful
+
+User -> AccountManagerUI : Modify Account
+AccountManagerUI -> AccountController : modifyAccountRequest()
+AccountController -> AccountServiceAPI : updateAccountDetails()
+AccountServiceAPI -> Account : editDetails()
+Account -> AccountStatus : updateStatus()
+AccountServiceAPI -> AccountController : updateSuccess()
+AccountController -> AccountManagerUI : modificationSuccess()
+AccountManagerUI -> User : Modification Successful
+
+@enduml

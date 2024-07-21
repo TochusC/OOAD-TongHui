@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+
+actor User
+boundary SimilarQuestionUI
+
+control SimilarQuestionController
+
+entity SimilarQuestion
+entity ExistingQuestion
+
+User -> SimilarQuestionUI : Query Similar Questions
+SimilarQuestionUI -> SimilarQuestionController : findSimilarQuestions(query)
+SimilarQuestionController -> SimilarQuestion : searchSimilarQuestions(query)
+SimilarQuestion -> ExistingQuestion : retrieveQuestionDetails(questionId)
+SimilarQuestion -> SimilarQuestionController : sendSimilarQuestions(similarQuestions)
+SimilarQuestionController -> SimilarQuestionUI : displaySimilarQuestions(similarQuestions)
+SimilarQuestionUI -> User : Show Similar Questions
+
+@enduml

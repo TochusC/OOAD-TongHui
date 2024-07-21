@@ -1,0 +1,10 @@
+@startuml
+boundary SimilarQuestionUI
+
+control SimilarQuestionController
+
+entity SimilarQuestion
+entity ExistingQuestion
+
+left to right direction
+@enduml

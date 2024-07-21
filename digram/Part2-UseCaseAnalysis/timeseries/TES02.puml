@@ -1,0 +1,21 @@
+@startuml
+hide footbox
+
+actor User
+
+boundary MoodLevelUI
+boundary MoodLevelAPI
+control MoodLevelController
+entity MoodLevel
+
+
+User -> MoodLevelUI : Record Mood Level
+MoodLevelUI -> MoodLevelController : recordMoodLevelRequest(moodLevel)
+MoodLevelController -> MoodLevelAPI : updateMoodLevel(userId, moodLevel)
+MoodLevelAPI -> MoodLevel : setMoodLevel(moodLevel)
+MoodLevel -> User : updateUserMoodLevel(moodLevel)
+MoodLevelAPI -> MoodLevelController : moodLevelUpdated()
+MoodLevelController -> MoodLevelUI : displayMoodLevelRecorded(moodLevel)
+MoodLevelUI -> User : Mood Level Recorded Successfully
+
+@enduml

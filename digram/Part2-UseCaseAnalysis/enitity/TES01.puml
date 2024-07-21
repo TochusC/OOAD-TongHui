@@ -1,0 +1,25 @@
+@startuml
+
+class 心理健康评估 {
+  -assessmentId: 字符串
+  -userId: 字符串
+  -status: 心理健康状态
+  -lastAssessment: 日期时间
+  +assessHealth(): 心理健康状态
+  +trackProgress(): 布尔
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +assessMentalHealth(): 心理健康评估
+  +getMentalHealthAssessment(): 心理健康评估
+}
+
+心理健康评估 "1" -- "*" 用户 : "属于"
+
+@enduml

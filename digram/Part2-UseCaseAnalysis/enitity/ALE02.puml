@@ -1,0 +1,27 @@
+@startuml
+
+class 个人信息 {
+  -userId: 字符串
+  -firstName: 字符串
+  -lastName: 字符串
+  -dateOfBirth: 日期
+  -phoneNumber: 字符串
+  -address: 字符串
+  +updateInfo(): 布尔
+  +retrieveInfo(): 个人信息
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +managePersonalInfo(newInfo: 个人信息): 布尔
+  +getPersonalInfo(): 个人信息
+}
+
+个人信息 "1" -- "*" 用户 : "属于"
+
+@enduml

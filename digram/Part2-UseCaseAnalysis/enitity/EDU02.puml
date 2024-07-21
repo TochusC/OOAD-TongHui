@@ -1,0 +1,22 @@
+@startuml
+
+class 推荐题目 {
+  -topicId: 字符串
+  -description: 字符串
+  -difficultyLevel: 整数
+  +recommendTopic(): 推荐题目列表
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +getRecommendedTopics(): 推荐题目列表
+}
+
+推荐题目 "1" -- "*" 用户 : "被...获取"
+
+@enduml

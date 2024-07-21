@@ -1,0 +1,54 @@
+@startuml
+' 定义部署组件
+' 定义部署约束
+package "云基础设施" {
+    node "数据库服务器" as DBServer {
+      artifact "数据库" as Database
+    }
+
+    node "客户端" as Client {
+      artifact "学生客户端" as StudentClient
+      artifact "教师客户端" as TeacherClient
+      artifact "家长客户端" as ParentClient
+      artifact "社会客户端" as PublicClient
+    }
+}
+
+
+node "服务器" as Server {
+  artifact "一对一虚拟AI助教" as AIAssistant
+  artifact "多模态心理健康检测" as MentalHealth
+  artifact "全方面心理群防预警" as Prevention
+  artifact "个性化智能育心教育" as Education
+  artifact "系统服务" as SystemServices
+}
+
+
+' 定义连接
+Server --> DBServer : 数据库连接
+StudentClient --> Server : 应用连接
+TeacherClient --> Server : 应用连接
+ParentClient --> Server : 应用连接
+PublicClient --> Server : 应用连接
+
+node "互联网" as Internet
+
+' 定义通信协议
+Server --> Internet : HTTPS
+DBServer --> Internet : SSL
+
+
+
+' 定义网络边界
+node "企业网络" as CorporateNetwork
+
+' 定义客户端网络
+node "客户端网络" as ClientNetwork
+
+' 定义部署关系
+Server --> CorporateNetwork : 部署
+DBServer --> CorporateNetwork : 部署
+Client --> ClientNetwork : 部署
+
+
+@enduml

@@ -1,0 +1,137 @@
+@startuml
+
+' 定义接口
+interface MentalHealthAPI {
+  + manageMentalHealth()
+  + viewMentalHealth()
+  + viewMoodLevel()
+}
+
+interface EducationAPI {
+  + manageCourse()
+  + viewLearningProgress()
+  + viewStudyReport()
+  + viewSimilarQuestions()
+  + viewRecommendedTopics()
+}
+
+interface WarningMessageAPI {
+  + manageMessages()
+  + createSystemNotification()
+  + deleteSystemNotification()
+  + receiveCrisisWarning()
+}
+
+interface SystemServiceAPI {
+  + userService()
+  + courseService()
+  + mentalHealthService()
+  + preventionService()
+  + educationService()
+}
+
+' 定义类
+package com.mentalhealth {
+  class MentalHealthSubsystem {
+    - mentalHealthAssessment
+    - moodLevel
+    + manageMentalHealth()
+    + viewMentalHealth()
+    + viewMoodLevel()
+  }
+}
+
+package com.education {
+  class EducationSubsystem {
+    - courseManagement
+    - learningProgress
+    - studyReport
+    - similarQuestion
+    - recommendedTopic
+    + manageCourse()
+    + viewLearningProgress()
+    + viewStudyReport()
+    + viewSimilarQuestions()
+    + viewRecommendedTopics()
+  }
+}
+
+package com.prevention {
+  class PreventionSubsystem {
+    - warningMessageList
+    + manageMessages()
+    + createSystemNotification()
+    + deleteSystemNotification()
+    + receiveCrisisWarning()
+  }
+}
+
+' 定义系统其他部分
+package UILayer {
+  class UIController {}
+}
+
+package ControllerLayer {
+  class ActionController {
+    + handleRequest()
+  }
+}
+
+package ServiceLayer {
+  class UserService {
+    + getUserDetails()
+  }
+  class CourseService {
+    + getCourseDetails()
+  }
+  class MentalHealthService {
+    + getHealthAssessment()
+  }
+  class PreventionService {
+    + getWarningMessages()
+  }
+  class EducationService {
+    + getEducationalContent()
+  }
+}
+
+package PersistenceLayer {
+  class DatabaseAccess {}
+}
+
+package EntityLayer {
+  class User {}
+  class Course {}
+  class HealthRecord {}
+  class Warning {}
+  class EducationContent {}
+}
+
+' 定义交互关系
+UIController --> ActionController : handleRequest()
+ActionController --> UserService : getUserDetails()
+ActionController --> CourseService : getCourseDetails()
+ActionController --> MentalHealthService : getHealthAssessment()
+ActionController --> PreventionService : getWarningMessages()
+ActionController --> EducationService : getEducationalContent()
+
+UserService --> User
+CourseService --> Course
+MentalHealthService --> HealthRecord
+PreventionService --> Warning
+EducationService --> EducationContent
+
+UserService --> MentalHealthSubsystem : manageMentalHealth()
+CourseService --> EducationSubsystem : manageCourse()
+MentalHealthService --> MentalHealthSubsystem : viewMentalHealth()
+PreventionService --> PreventionSubsystem : manageMessages()
+EducationService --> EducationSubsystem : viewLearningProgress()
+
+EducationAPI -- EducationSubsystem
+MentalHealthAPI -- MentalHealthSubsystem
+WarningMessageAPI -- PreventionSubsystem
+SystemServiceAPI -- ServiceLayer
+
+ServiceLayer - PersistenceLayer
+PersistenceLayer - EntityLayer
+@enduml

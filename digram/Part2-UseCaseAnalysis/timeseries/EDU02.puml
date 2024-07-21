@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+
+actor User
+
+boundary RecommendedTopicUI
+
+control RecommendedTopicController
+
+entity RecommendedTopic
+
+User -> RecommendedTopicUI : Request Recommended Topics
+RecommendedTopicUI -> RecommendedTopicController : getRecommendedTopicsRequest(userId)
+RecommendedTopicController -> RecommendedTopic : fetchRecommendedTopicsForUser(userId)
+RecommendedTopic -> User : determineUserPreferences()
+RecommendedTopic -> RecommendedTopicController : sendRecommendedTopics(topics)
+RecommendedTopicController -> RecommendedTopicUI : displayRecommendedTopics(topics)
+RecommendedTopicUI -> User : Show Recommended Topics
+
+@enduml

@@ -1,0 +1,164 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+actor 学生
+
+package 一对一虚拟AI助教{
+    usecase 与AI助教互动
+
+    usecase 使用语音互动
+    usecase 使用文本互动
+
+    与AI助教互动 <.right. 使用语音互动 : <<extended>>
+    与AI助教互动 <.right. 使用文本互动 : <<extended>>
+
+    package 垂直行业大模型-心理健康大模型EmoLLM{
+        usecase 倾诉心理烦恼
+        usecase 咨询心理问题
+    }
+
+    package 通用智能大模型ERNIE3.5{
+    usecase 解答学习疑惑
+    usecase 辅助使用系统
+    }
+
+    与AI助教互动 ..> 倾诉心理烦恼 : <<include>>
+    与AI助教互动 ..> 咨询心理问题 : <<include>>
+
+    与AI助教互动 ..> 解答学习疑惑 : <<include>>
+    与AI助教互动 ..> 辅助使用系统 : <<include>>
+
+    usecase 进行路由跳转
+    usecase 总结图表数据
+
+    辅助使用系统 ..> 进行路由跳转 : <<include>>
+    辅助使用系统 ..> 总结图表数据 : <<include>>
+}
+
+package 多模态心理健康检测{
+    usecase 查看心理健康情况
+    usecase 查看心情活跃值
+}
+
+package 全方面心理群防预警{
+    usecase 管理消息
+
+    usecase 管理站内信
+    usecase 新建站内信
+    usecase 删除站内信
+    usecase 查看站内信
+
+    usecase 管理系统通知
+    usecase 新建系统通知
+    usecase 删除系统通知
+
+    usecase 接收心理危机预警
+    管理系统通知 <.. 接收心理危机预警 : <<extended>>
+    usecase 接收手机短信
+    usecase 接收电子邮件
+    接收心理危机预警 ..> 接收手机短信 : <<include>>
+    接收心理危机预警 ..> 接收电子邮件 : <<include>>
+
+    管理消息 ..> 管理站内信 : <<include>>
+    管理消息 ..> 管理系统通知 : <<include>>
+
+    管理站内信 ..> 新建站内信 : <<include>>
+    管理站内信 ..> 删除站内信 : <<include>>
+    管理站内信 ..> 查看站内信 : <<include>>
+
+    管理系统通知 ..> 新建系统通知 : <<include>>
+    管理系统通知 ..> 删除系统通知 : <<include>>
+
+
+
+    usecase 管理个人信息
+    管理消息 .right.> 管理个人信息
+
+    usecase 管理个人基本信息
+    管理个人信息 ..> 管理个人基本信息 : <<include>>
+    usecase 查看个人基本信息
+    usecase 修改个人基本信息
+    管理个人基本信息 ..> 查看个人基本信息 : <<include>>
+    管理个人基本信息 ..> 修改个人基本信息 : <<include>>
+
+    usecase 管理学籍认证信息
+    管理个人信息 ..> 管理学籍认证信息 : <<include>>
+    usecase 查看学籍认证信息
+    usecase 修改学籍认证信息
+    管理学籍认证信息 ..> 查看学籍认证信息 : <<include>>
+    管理学籍认证信息 ..> 修改学籍认证信息 : <<include>>
+
+
+    usecase 管理辅导员信息
+    管理个人信息 ..> 管理辅导员信息 : <<include>>
+    usecase 查看辅导员信息
+    usecase 修改辅导员信息
+    管理辅导员信息 ..> 查看辅导员信息 : <<include>>
+    管理辅导员信息 ..> 修改辅导员信息 : <<include>>
+
+    usecase 管理家庭信息
+    管理个人信息 ..> 管理家庭信息 : <<include>>
+    usecase 查看家庭信息
+    usecase 修改家庭信息
+    管理家庭信息 ..> 查看家庭信息 : <<include>>
+    管理家庭信息 ..> 修改家庭信息 : <<include>>
+}
+
+package 个性化智能育心教育{
+    usecase 查看作答评估
+    usecase 查看学习进度
+    usecase 查看相似例题
+    usecase 查看推荐题目
+    usecase 查看学习报告
+    
+
+    usecase 查看每日学习时长
+    usecase 查看各科学习进度
+    usecase 查看做题历史
+
+    查看学习进度 ..> 查看每日学习时长  : <<include>>
+    查看学习进度 ..> 查看各科学习进度  : <<include>>
+    查看学习进度 ..> 查看做题历史  : <<include>>
+
+    usecase 查看课程信息
+}
+
+package 系统{
+    usecase 管理账号
+
+    usecase 注册账号
+    usecase 登录账号
+    usecase 注销账号
+
+    usecase 修改账号
+    usecase 修改密码
+    usecase 修改认证信息
+
+    管理账号 ..> 注册账号 : <<include>>
+    管理账号 ..> 登录账号 : <<include>>
+    管理账号 ..> 注销账号 : <<include>>
+
+    管理账号 ..> 修改账号 : <<include>>
+    修改账号 ..> 修改认证信息 : <<include>>
+    修改账号 ..> 修改密码 : <<include>>
+
+}
+
+学生 --> 管理消息
+学生 --> 管理账号
+学生 --> 与AI助教互动
+学生 --> 管理个人信息
+学生 --> 查看学习进度
+学生 --> 查看学习报告
+学生 --> 查看相似例题
+学生 --> 查看推荐题目
+学生 --> 查看心理健康情况
+学生 --> 查看心情活跃值
+学生 --> 查看作答评估
+学生 --> 查看课程信息
+
+
+
+@enduml

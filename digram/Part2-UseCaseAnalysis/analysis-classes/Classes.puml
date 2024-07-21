@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+boundary ReportUI
+boundary MoodLevelUI
+boundary AssessmentUI
+boundary AIAssistantUI
+boundary AccountManagerUI
+boundary MessageManagerUI
+boundary SimilarQuestionUI
+boundary CourseManagementUI
+boundary LearningProgressUI
+boundary RecommendedTopicUI
+boundary PersonalInfoManagerUI
+boundary MentalHealthAssessmentUI
+
+boundary MoodLevelAPI
+boundary CourseServiceAPI
+boundary AccountServiceAPI
+boundary MessageServiceAPI
+boundary LearningProgressAPI
+boundary PersonalInfoServiceAPI
+boundary MentalHealthAssessmentAPI
+
+control ReportController
+control MessageController
+control AccountController
+control MoodLevelController
+control AssessmentController
+control AIAssistantController
+control PersonalInfoController
+control SimilarQuestionController
+control CourseManagementController
+control RecommendedTopicController
+control LearningProgressController
+control MentalHealthAssessmentController
+
+entity User
+entity Role
+entity Course
+entity Report
+entity Message
+entity Student
+entity Account
+entity MoodLevel
+entity Instructor
+entity Assessment
+entity AIAssistant
+entity PersonalInfo
+entity AccountStatus
+entity CourseMaterial
+entity UserInteraction
+entity SimilarQuestion
+entity ExistingQuestion
+entity RecommendedTopic
+entity LearningProgress
+entity MentalHealthAssessment
+
+boundary MentalHealthAssessmentAPI
+boundary MoodLevelUI
+boundary MoodLevelAPI
+control MoodLevelController
+entity MoodLevel
+@enduml

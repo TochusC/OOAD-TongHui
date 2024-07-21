@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+' 定义接口
+interface WarningMessageAPI {
+  + manageMessages()
+  + createSystemNotification()
+  + deleteSystemNotification()
+  + receiveCrisisWarning()
+}
+
+' 定义类
+package com.prevention {
+    class PreventionSubsystem {
+      - warningMessageList
+      + manageMessages()
+      + createSystemNotification()
+      + deleteSystemNotification()
+      + receiveCrisisWarning()
+    }
+}
+
+' 关系
+WarningMessageAPI -- PreventionSubsystem
+
+@enduml

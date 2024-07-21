@@ -1,0 +1,215 @@
+@startuml
+class 账号 {
+  -accountId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +authenticate(username: 字符串, password: 字符串): 布尔
+  +updateProfile(newUsername: 字符串, newPassword: 字符串, newEmail: 字符串): 布尔
+  +changePassword(currentPassword: 字符串, newPassword: 字符串): 布尔
+  +deactivateAccount(): 布尔
+}
+
+
+class AI助教 {
+  -assistantId: 字符串
+  -lastInteraction: 日期时间
+  +interactWithUser(userId: 字符串, query: 字符串): 字符串
+  +provideAssistance(): 布尔
+}
+
+class UserInteraction {
+  -interactionId: 字符串
+  -userId: 字符串
+  -assistantId: 字符串
+  -query: 字符串
+  -response: 字符串
+  -timestamp: 日期时间
+  +recordInteraction(): 布尔
+  +getInteractionHistory(): 用户交互列表
+}
+
+AI助教 "1" -- "*" UserInteraction : "进行交互"
+
+
+class 消息 {
+  -messageId: 字符串
+  -senderId: 字符串
+  -receiverId: 字符串
+  -content: 字符串
+  -timestamp: 日期时间
+  -status: 消息状态
+  +sendMessage(): 布尔
+  +readMessage(): 布尔
+  +deleteMessage(): 布尔
+}
+
+class 个人信息 {
+  -userId: 字符串
+  -firstName: 字符串
+  -lastName: 字符串
+  -dateOfBirth: 日期
+  -phoneNumber: 字符串
+  -address: 字符串
+  +updateInfo(): 布尔
+  +retrieveInfo(): 个人信息
+}
+个人信息 "1" -- "*" 用户 : "属于"
+
+class 学习进度 {
+  -progressId: 字符串
+  -userId: 字符串
+  -courseId: 字符串
+  -progress: 浮点数
+  -lastUpdated: 日期时间
+  +updateProgress(): 布尔
+  +getProgress(): 学习进度
+}
+
+
+class 课程 {
+  -courseId: 字符串
+  -courseName: 字符串
+  -description: 字符串
+  -instructorId: 字符串
+  -startDate: 日期
+  -endDate: 日期
+  +listCourses(): 课程列表
+}
+
+学习进度 "1" -- "*" 用户 : "由...查看"
+学习进度 "1" -- "*" 课程 : "关联"
+
+class 推荐题目 {
+  -topicId: 字符串
+  -description: 字符串
+  -difficultyLevel: 整数
+  +recommendTopic(): 推荐题目列表
+}
+推荐题目 "1" -- "*" 用户 : "被...获取"
+
+class 评估 {
+  -assessmentId: 字符串
+  -userId: 字符串
+  -courseId: 字符串
+  -score: 浮点数
+  -feedback: 字符串
+  +submitAssessment(): 布尔
+  +getAssessment(): 评估
+}
+评估 "1" -- "*" 用户 : "由...提交或获取"
+
+class 相似例题 {
+  -questionId: 字符串
+  -relatedQuestionId: 字符串
+  -similarityScore: 浮点数
+  +findSimilarQuestions(): 相似例题列表
+}
+
+class 现有例题 {
+  -questionId: 字符串
+  -content: 字符串
+  +findSimilarQuestions(questionId: 字符串): 相似例题列表
+}
+
+相似例题 "1" -- "*" 现有例题 : "相似于"
+
+class 报告 {
+  -reportId: 字符串
+  -userId: 字符串
+  -reportType: 报告类型
+  -content: 字符串
+  +generateReport(): 报告
+  +downloadReport(): 布尔
+}
+报告 "1" -- "*" 用户 : "由...生成或下载"
+
+class 用户 {
+    -userId: 字符串
+    -username: 字符串
+    -password: 字符串
+    -email: 字符串
+    -role: 角色
+    -status: 用户状态
+    +sendMessage(receiverId: 字符串, content: 字符串): 布尔
+    +receiveMessage(messageId: 字符串): 布尔
+    +deleteMessage(messageId: 字符串): 布尔
+    +managePersonalInfo(newInfo: 个人信息): 布尔
+    +getPersonalInfo(): 个人信息
+    +getProgress(courseId: 字符串): 学习进度
+    +getRecommendedTopics(): 推荐题目列表
+    +submitAssessment(courseId: 字符串): 布尔
+    +getAssessment(assessmentId: 字符串): 评估
+      +generateReport(): 报告
+      +downloadReport(reportId: 字符串): 布尔
+}
+
+消息 "1" -- "*" 用户 : "由...发送或接收"
+
+
+教师 --|> 用户
+学生 --|> 用户
+
+enum 角色 {
+  <<enum>>
+  管理员
+  普通用户
+  访客
+}
+
+enum 账号状态 {
+  <<enum>>
+  激活
+  未激活
+  注销
+}
+
+class 课程 {
+  -courseId: 字符串
+  -courseName: 字符串
+  -description: 字符串
+  -instructorId: 字符串
+  -startDate: 日期
+  -endDate: 日期
+  +enrollCourse(): 布尔
+  +updateCourse(): 布尔
+  +listCourses(): 课程列表
+}
+
+class 教师 {
+  -instructorId: 字符串
+  -name: 字符串
+  -email: 字符串
+  -phoneNumber: 字符串
+  +assignCourse(courseId: 字符串): 布尔
+  +getAssignedCourses(): 课程列表
+}
+
+class 学生 {
+  -studentId: 字符串
+  -name: 字符串
+  -email: 字符串
+  -enrolledCourses: 课程列表
+  +enrollCourse(courseId: 字符串): 布尔
+  +dropCourse(courseId: 字符串): 布尔
+}
+
+class 课程材料 {
+  -materialId: 字符串
+  -courseId: 字符串
+  -title: 字符串
+  -content: 字符串
+  +uploadMaterial(): 布尔
+  +downloadMaterial(): 布尔
+}
+
+课程 "1" -- "*" 教师 : "由...授课"
+课程 "1" -- "*" 学生 : "有...参与"
+课程 "1" -- "*" 课程材料 : "包含"
+
+账号 "1" -- "*" 角色 : "具有"
+账号 "1" -- "*" 账号状态 : "处于"
+用户 "1" -- "1" 账号 : "拥有"
+@enduml

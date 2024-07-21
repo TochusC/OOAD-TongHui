@@ -1,0 +1,200 @@
+@startuml
+' 设计机制类图示例
+
+' 定义类
+class Account {
+  - id: Long
+  - username: String
+  - password: String
+  - role: Role
+  - status: AccountStatus
+  -- +authenticate(): Boolean
+  -- +changePassword(): Boolean
+}
+
+class Role {
+  - name: String
+  - permissions: Set<Permission>
+  -- +hasPermission(permission: Permission): Boolean
+}
+
+class Permission {
+  - name: String
+}
+
+class AccountStatus {
+  - status: String
+  -- +updateStatus(newStatus: String): Boolean
+}
+
+class Message {
+  - id: Long
+  - content: String
+  - sender: User
+  - receiver: User
+  -- +sendMessage(): Boolean
+  -- +deleteMessage(): Boolean
+}
+
+class User {
+  - id: Long
+  - personalInfo: PersonalInfo
+  - moodLevel: MoodLevel
+  -- +updatePersonalInfo(): Boolean
+  -- +updateMoodLevel(): Boolean
+}
+
+class PersonalInfo {
+  - name: String
+  - address: String
+  -- +encryptData(): String
+}
+
+class MentalHealthAssessment {
+  - id: Long
+  - user: User
+  - result: String
+  -- +performAssessment(): Boolean
+}
+
+class MoodLevel {
+  - level: Integer
+  -- +monitorLevel(): Boolean
+}
+
+class LearningProgress {
+  - user: User
+  - course: Course
+  - progress: Integer
+  -- +updateProgress(): Boolean
+}
+
+class RecommendedTopic {
+  - id: Long
+  - course: Course
+  - content: String
+  -- +generateRecommendation(): Boolean
+}
+
+class Assessment {
+  - id: Long
+  - user: User
+  - score: Integer
+  -- +evaluatePerformance(): Boolean
+}
+
+class SimilarQuestion {
+  - id: Long
+  - question: String
+  -- +calculateSimilarity(): Boolean
+}
+
+class Report {
+  - id: Long
+  - content: String
+  -- +generateReport(): Boolean
+}
+
+class Course {
+  - id: Long
+  - instructor: Instructor
+  - material: CourseMaterial
+  -- +updateCourseInfo(): Boolean
+}
+
+class Instructor {
+  - id: Long
+  - personalInfo: PersonalInfo
+  -- +manageCourse(): Boolean
+}
+
+class Student {
+  - id: Long
+  - learningProgress: LearningProgress
+  -- +enrollCourse(): Boolean
+}
+
+class CourseMaterial {
+  - id: Long
+  - content: String
+  -- +uploadMaterial(): Boolean
+}
+
+class AIAssistant {
+  - id: Long
+  - interactionLog: InteractionLog
+  -- +interactWithUser(): Boolean
+}
+
+class UserInteraction {
+  - id: Long
+  - user: User
+  - aiAssistant: AIAssistant
+  -- +logInteraction(): Boolean
+}
+
+class InteractionLog {
+  - id: Long
+  - log: String
+  -- +saveLog(): Boolean
+}
+
+' 定义关联关系
+Account "1" -- "*" Role
+Account "1" -- "1" AccountStatus
+Message "1" -- "*" User
+User "1" -- "1" PersonalInfo
+User "1" -- "1" MoodLevel
+MentalHealthAssessment "1" -- "1" User
+LearningProgress "1" -- "1" User
+LearningProgress "1" -- "1" Course
+RecommendedTopic "1" -- "1" Course
+Assessment "1" -- "1" User
+SimilarQuestion "1" -- "1" Course
+Report "1" -- "1" Course
+Course "1" -- "1" Instructor
+Instructor "1" -- "1" PersonalInfo
+Student "1" -- "1" LearningProgress
+CourseMaterial "1" -- "1" Course
+AIAssistant "1" -- "1" InteractionLog
+UserInteraction "1" -- "1" User
+UserInteraction "1" -- "1" AIAssistant
+
+' 定义泛化关系
+Account <|-- User
+User <|-- Student
+User <|-- Instructor
+CourseMaterial <|-- RecommendedTopic
+
+' 定义聚合关系
+Course "uses" -- "*" CourseMaterial
+AIAssistant "uses" -- "*" UserInteraction
+
+' 定义接口
+interface IDataPersistence {
+  +persistData(data: Object): Boolean
+  +retrieveData(id: Long): Object
+  +deleteData(id: Long): Boolean
+}
+
+' 实现接口
+Account --|> IDataPersistence
+Role --|> IDataPersistence
+Message --|> IDataPersistence
+PersonalInfo --|> IDataPersistence
+MentalHealthAssessment --|> IDataPersistence
+MoodLevel --|> IDataPersistence
+LearningProgress --|> IDataPersistence
+RecommendedTopic --|> IDataPersistence
+Assessment --|> IDataPersistence
+SimilarQuestion --|> IDataPersistence
+Report -|> IDataPersistence
+Course --|> IDataPersistence
+Instructor --|> IDataPersistence
+Student --|> IDataPersistence
+CourseMaterial --|> IDataPersistence
+AIAssistant --|> IDataPersistence
+UserInteraction --|> IDataPersistence
+InteractionLog --|> IDataPersistence
+
+@enduml

@@ -1,0 +1,73 @@
+@startuml
+
+left to right direction
+
+package "一对一虚拟AI助教" as AIAssistantPackage {
+  package "垂直行业大模型-心理健康大模型EmoLLM" as EmoLLMPackage
+  package "通用智能大模型ERNIE3.5" as ERNIEPackage
+}
+
+package "多模态心理健康检测" as MentalHealthPackage {
+  interface "心理健康检测接口" as MentalHealthAPI
+  component "心理健康子系统" as MentalHealthSubsystem
+}
+
+package "全方面心理群防预警" as PreventionPackage {
+  interface "预警消息接口" as WarningMessageAPI
+  component "预警子系统" as PreventionSubsystem
+}
+
+package "个性化智能育心教育" as EducationPackage {
+  interface "育心教育接口" as EducationAPI
+  component "教育子系统" as EducationSubsystem
+}
+
+
+package "系统" as SystemPackage {
+  package "UI层" as UILayer
+  package "控制层" as ControllerLayer
+  package "服务层" as ServiceLayer
+  package "实体层" as EntityLayer
+  interface "系统服务接口" as SystemServiceAPI
+}
+
+' 定义依赖关系
+AIAssistantPackage -> MentalHealthSubsystem
+AIAssistantPackage -> PreventionSubsystem
+AIAssistantPackage -> EducationSubsystem
+AIAssistantPackage -> SystemPackage
+
+EmoLLMPackage -> AIAssistantPackage
+ERNIEPackage -> AIAssistantPackage
+
+UILayer --> ControllerLayer
+ControllerLayer --> ServiceLayer
+ServiceLayer --> EntityLayer
+
+' 接口实现关系
+MentalHealthSubsystem --> MentalHealthAPI
+PreventionSubsystem --> WarningMessageAPI
+EducationSubsystem --> EducationAPI
+ServiceLayer --> SystemServiceAPI
+
+' 子系统边界
+MentalHealthPackage <. MentalHealthSubsystem
+PreventionPackage <. PreventionSubsystem
+EducationPackage <. EducationSubsystem
+
+' 注释
+note "AI助教包负责与用户的交互和业务逻辑处理" as Note1
+Note1 .. AIAssistantPackage
+
+note "心理健康包提供心理健康检测功能" as Note2
+Note2 .. MentalHealthPackage
+
+note "预警包负责心理危机预警相关功能" as Note3
+Note3 .. PreventionPackage
+
+note "教育包提供个性化的育心教育服务" as Note4
+Note4 .. EducationPackage
+
+note "系统包包含UI、控制层、服务层和实体层，负责系统的整体架构" as Note5
+Note5 .. SystemPackage
+@enduml

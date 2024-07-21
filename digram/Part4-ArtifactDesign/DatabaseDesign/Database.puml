@@ -1,0 +1,365 @@
+@startuml
+@startuml
+left to right direction
+
+' 账户表
+class IAccount {
+  accountId string
+  username string
+  password string
+  email string
+  role 角色
+  status 账号状态
+}
+
+' 标准账户表
+class StandardAccount {
+  accountId string PK "PK"
+  username string
+  password string
+  email string
+  role 角色
+  status 账号状态
+}
+
+' 管理员账户表
+class AdminAccount {
+  accountId string PK "PK"
+  username string
+  password string
+  email string
+  role 角色
+  status 账号状态
+}
+
+' AI助手表
+class IAIAssistant {
+  assistantId string PK "PK"
+  lastInteraction 日期时间
+}
+
+' EmoLLMAssistant表
+class EmoLLMAssistant {
+  assistantId string PK "PK"
+  lastInteraction 日期时间
+}
+
+' ERNIEAssistant表
+class ERNIEAssistant {
+  assistantId string PK "PK"
+  lastInteraction 日期时间
+}
+
+' 用户交互表
+class IUserInteraction {
+  interactionId string PK "PK"
+  userId string
+  assistantId string
+  query string
+  response string
+  timestamp 日期时间
+}
+
+' 文本交互表
+class TextInteraction {
+  interactionId string PK "PK"
+  userId string
+  assistantId string
+  query string
+  response string
+  timestamp 日期时间
+}
+
+' 语音交互表
+class VoiceInteraction {
+  interactionId string PK "PK"
+  userId string
+  assistantId string
+  query string
+  response string
+  timestamp 日期时间
+}
+
+' 消息表
+class IMessage {
+  messageId string PK "PK"
+  senderId string
+  receiverId string
+  content string
+  timestamp 日期时间
+  status 消息状态
+}
+
+' 文本消息表
+class TextMessage {
+  messageId string PK "PK"
+  senderId string
+  receiverId string
+  content string
+  timestamp 日期时间
+  status 消息状态
+}
+
+' 图片消息表
+class ImageMessage {
+  messageId string PK "PK"
+  senderId string
+  receiverId string
+  content string
+  timestamp 日期时间
+  status 消息状态
+}
+
+' 个人信息表
+class IPersonalInfo {
+  userId string PK "PK"
+  firstName string
+  lastName string
+  dateOfBirth 日期
+  phoneNumber string
+  address string
+}
+
+' 基本个人信息表
+class BasicPersonalInfo {
+  userId string PK "PK"
+  firstName string
+  lastName string
+  dateOfBirth 日期
+  phoneNumber string
+  address string
+}
+
+' 学习进度表
+class IProgress {
+  progressId string PK "PK"
+  userId string
+  courseId string
+  progress float
+  lastUpdated 日期时间
+}
+
+' 课程进度表
+class CourseProgress {
+  progressId string PK "PK"
+  userId string
+  courseId string
+  progress float
+  lastUpdated 日期时间
+}
+
+' 课程表
+class ICourse {
+  courseId string PK "PK"
+  courseName string
+  description string
+  instructorId string
+  startDate 日期
+  endDate 日期
+}
+
+' 标准课程表
+class StandardCourse {
+  courseId string PK "PK"
+  courseName string
+  description string
+  instructorId string
+  startDate 日期
+  endDate 日期
+}
+
+' 课程材料表
+class ICourseMaterial {
+  materialId string PK "PK"
+  courseId string
+  title string
+  content string
+}
+
+' 课程材料表
+class CourseMaterial {
+  materialId string PK "PK"
+  courseId string
+  title string
+  content string
+}
+
+' 评估表
+class IAssessment {
+  assessmentId string PK "PK"
+  userId string
+  courseId string
+  score float
+  feedback string
+}
+
+' 课程评估表
+class CourseAssessment {
+  assessmentId string PK "PK"
+  userId string
+  courseId string
+  score float
+  feedback string
+}
+
+' 推荐题目表
+class IRecommendedTopic {
+  topicId string PK "PK"
+  description string
+  difficultyLevel int
+}
+
+' 主题推荐表
+class TopicRecommendation {
+  topicId string PK "PK"
+  description string
+  difficultyLevel int
+}
+
+' 相似例题表
+class ISimilarQuestion {
+  questionId string PK "PK"
+  relatedQuestionId string
+  similarityScore float
+}
+
+' 相似问题表
+class SimilarQuestion {
+  questionId string PK "PK"
+  relatedQuestionId string
+  similarityScore float
+}
+
+' 现有例题表
+class IExistingQuestion {
+  questionId string PK "PK"
+  content string
+}
+
+' 现有问题表
+class ExistingQuestion {
+  questionId string PK "PK"
+  content string
+}
+
+' 报告表
+class IReport {
+  reportId string PK "PK"
+  userId string
+  reportType 报告类型
+  content string
+}
+
+' 用户报告表
+class UserReport {
+  reportId string PK "PK"
+  userId string
+  reportType 报告类型
+  content string
+}
+
+' 用户表
+class IUser {
+  userId string PK "PK"
+  username string
+  password string
+  email string
+  role 角色
+  status 用户状态
+}
+
+' 教师表
+class Teacher {
+  userId string PK "PK"
+  instructorId string
+  name string
+  email string
+  phoneNumber string
+}
+
+' 学生表
+class Student {
+  userId string PK "PK"
+  studentId string
+  name string
+  email string
+  enrolledCourses 课程列表
+}
+
+' 心理健康检测接口表
+class IPsychologicalHealth {
+  detectorId string PK "PK"
+  lastDetection 日期时间
+}
+
+' 心理健康检测器表
+class MentalHealthDetector {
+  detectorId string PK "PK"
+  lastDetection 日期时间
+}
+
+' 心理健康记录表
+class MentalHealthRecord {
+  recordId string PK "PK"
+  userId string
+  detectorId string
+  healthStatus 心理健康状态
+  timestamp 日期时间
+}
+
+' 心情活跃度测量接口表
+class IMoodActivity {
+  measurerId string PK "PK"
+  lastMeasurement 日期时间
+}
+
+' 心情活跃度测量器表
+class MoodActivityMeasurer {
+  measurerId string PK "PK"
+  lastMeasurement 日期时间
+}
+
+' 心情活跃度记录表
+class MoodActivityLog {
+  logId string PK "PK"
+  userId string
+  measurerId string
+  moodLevel float
+  timestamp 日期时间
+}
+
+' 关系
+Teacher "1" -- "*" StandardCourse : "授课"
+Student "1" -- "*" StandardCourse : "参与"
+StandardCourse "1" -- "*" CourseMaterial : "包含"
+IUser "1" -- "1" IAccount : "拥有"
+IUser "1" -- "*" IMessage : "发送或接收"
+IUser "1" -- "1" IPersonalInfo : "属于"
+IUser "1" -- "*" CourseProgress : "查看"
+IUser "1" -- "*" TopicRecommendation : "获取"
+IUser "1" -- "*" CourseAssessment : "提交或获取"
+IUser "1" -- "*" UserReport : "生成或下载"
+IAIAssistant "1" -- "*" IPsychologicalHealth : "依赖"
+IAIAssistant "1" -- "*" IMoodActivity : "依赖"
+EmoLLMAssistant "1" -- "*" IAIAssistant : "实现"
+ERNIEAssistant "1" -- "*" IAIAssistant : "实现"
+IUserInteraction "1" -- "*" IUser : "实现"
+TextMessage "1" -- "*" IMessage : "实现"
+ImageMessage "1" -- "*" IMessage : "实现"
+BasicPersonalInfo "1" -- "*" IPersonalInfo : "实现"
+CourseProgress "1" -- "*" IProgress : "实现"
+StandardCourse "1" -- "*" ICourse : "实现"
+CourseMaterial "1" -- "*" ICourseMaterial : "实现"
+CourseAssessment "1" -- "*" IAssessment : "实现"
+TopicRecommendation "1" -- "*" IRecommendedTopic : "实现"
+SimilarQuestion "1" -- "*" ISimilarQuestion : "实现"
+ExistingQuestion "1" -- "*" IExistingQuestion : "实现"
+UserReport "1" -- "*" IReport : "实现"
+IUser "1" -- "*" MentalHealthDetector : "接受心理健康检测"
+IUser "1" -- "*" MoodActivityMeasurer : "接受心情活跃度测量"
+MentalHealthDetector "1" -- "*" MentalHealthRecord : "记录心理健康状态"
+MoodActivityMeasurer "1" -- "*" MoodActivityLog : "记录心情活跃度"
+
+@enduml
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+hide footbox
+
+actor User
+boundary ReportUI
+
+control ReportController
+
+entity Report
+
+User -> ReportUI : Request Report
+ReportUI -> ReportController : generateReportRequest(reportType, userId)
+ReportController -> Report : createReport(reportType, userId)
+Report -> User : gatherDataForReport()
+Report -> ReportController : reportGenerated(reportData)
+ReportController -> ReportUI : displayReport(reportData)
+ReportUI -> User : Show Report
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+
+class 心情活跃值 {
+  -moodLevelId: 字符串
+  -userId: 字符串
+  -moodScore: 整数
+  -timestamp: 日期时间
+  +recordMood(): 布尔
+  +getMoodHistory(): 心情活跃值列表
+}
+
+class 用户 {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +recordMood(moodScore: 整数): 布尔
+  +getMoodHistory(): 心情活跃值列表
+}
+
+心情活跃值 "1" -- "*" 用户 : "由...记录或获取"
+
+@enduml

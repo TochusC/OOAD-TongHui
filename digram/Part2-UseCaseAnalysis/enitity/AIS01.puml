@@ -1,0 +1,23 @@
+@startuml
+
+class AI助教 {
+  -assistantId: 字符串
+  -lastInteraction: 日期时间
+  +interactWithUser(userId: 字符串, query: 字符串): 字符串
+  +provideAssistance(): 布尔
+}
+
+class UserInteraction {
+  -interactionId: 字符串
+  -userId: 字符串
+  -assistantId: 字符串
+  -query: 字符串
+  -response: 字符串
+  -timestamp: 日期时间
+  +recordInteraction(): 布尔
+  +getInteractionHistory(): 用户交互列表
+}
+
+AI助教 "1" -- "*" UserInteraction : "进行交互"
+
+@enduml

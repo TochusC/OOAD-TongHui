@@ -1,0 +1,26 @@
+@startuml
+hide footbox
+
+actor User
+boundary MentalHealthAssessmentUI
+boundary MentalHealthAssessmentAPI
+
+control MentalHealthAssessmentController
+
+entity MentalHealthAssessment
+
+User -> MentalHealthAssessmentUI : Start Assessment
+MentalHealthAssessmentUI -> MentalHealthAssessmentController : initiateAssessment(userId)
+MentalHealthAssessmentController -> MentalHealthAssessmentAPI : createAssessment(userId)
+MentalHealthAssessmentAPI -> MentalHealthAssessment : newAssessment(userId)
+MentalHealthAssessment -> User : presentAssessmentQuestions()
+User -> MentalHealthAssessmentUI : Submit Answers
+MentalHealthAssessmentUI -> MentalHealthAssessmentController : submitAnswers(userId, answers)
+MentalHealthAssessmentController -> MentalHealthAssessmentAPI : evaluateAssessment(userId, answers)
+MentalHealthAssessmentAPI -> MentalHealthAssessment : assess(answers)
+MentalHealthAssessment -> MentalHealthAssessmentAPI : sendAssessmentResult(result)
+MentalHealthAssessmentAPI -> MentalHealthAssessmentController : assessmentCompleted(result)
+MentalHealthAssessmentController -> MentalHealthAssessmentUI : displayAssessmentResult(result)
+MentalHealthAssessmentUI -> User : Show Assessment Result
+
+@enduml

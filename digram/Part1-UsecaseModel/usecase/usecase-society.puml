@@ -1,0 +1,116 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+package 多模态心理健康检测{
+    usecase 查看心理健康情况
+    usecase 查看心情活跃值
+}
+
+package 全方面心理群防预警{
+    usecase 管理消息
+
+    usecase 管理站内信
+    usecase 新建站内信
+    usecase 删除站内信
+    usecase 查看站内信
+
+    usecase 管理系统通知
+    usecase 新建系统通知
+    usecase 删除系统通知
+
+    usecase 接收心理危机预警
+    管理系统通知 <.. 接收心理危机预警 : <<extended>>
+    usecase 接收手机短信
+    usecase 接收电子邮件
+    接收心理危机预警 ..> 接收手机短信 : <<include>>
+    接收心理危机预警 ..> 接收电子邮件 : <<include>>
+
+    管理消息 ..> 管理站内信 : <<include>>
+    管理消息 ..> 管理系统通知 : <<include>>
+
+    管理站内信 ..> 新建站内信 : <<include>>
+    管理站内信 ..> 删除站内信 : <<include>>
+    管理站内信 ..> 查看站内信 : <<include>>
+
+    管理系统通知 ..> 新建系统通知 : <<include>>
+    管理系统通知 ..> 删除系统通知 : <<include>>
+
+
+
+    usecase 管理个人信息
+    管理消息 .right.> 管理个人信息
+
+    usecase 管理个人基本信息
+    管理个人信息 ..> 管理个人基本信息 : <<include>>
+    usecase 查看个人基本信息
+    usecase 修改个人基本信息
+    管理个人基本信息 ..> 查看个人基本信息 : <<include>>
+    管理个人基本信息 ..> 修改个人基本信息 : <<include>>
+
+    usecase 管理学籍认证信息
+    管理个人信息 ..> 管理学籍认证信息 : <<include>>
+    usecase 查看学籍认证信息
+    usecase 修改学籍认证信息
+    管理学籍认证信息 ..> 查看学籍认证信息 : <<include>>
+    管理学籍认证信息 ..> 修改学籍认证信息 : <<include>>
+
+
+    usecase 管理辅导员信息
+    管理个人信息 ..> 管理辅导员信息 : <<include>>
+    usecase 查看辅导员信息
+    usecase 修改辅导员信息
+    管理辅导员信息 ..> 查看辅导员信息 : <<include>>
+    管理辅导员信息 ..> 修改辅导员信息 : <<include>>
+
+    usecase 管理家庭信息
+    管理个人信息 ..> 管理家庭信息 : <<include>>
+    usecase 查看家庭信息
+    usecase 修改家庭信息
+    管理家庭信息 ..> 查看家庭信息 : <<include>>
+    管理家庭信息 ..> 修改家庭信息 : <<include>>
+}
+
+package 个性化智能育心教育{
+    usecase 查看学习进度
+    usecase 管理课程
+    usecase 查看每日学习时长
+    usecase 查看各科学习进度
+    usecase 查看做题历史
+
+    查看学习进度 ..> 查看每日学习时长  : <<include>>
+    查看学习进度 ..> 查看各科学习进度  : <<include>>
+    查看学习进度 ..> 查看做题历史  : <<include>>
+
+    usecase 新建课程
+    usecase 删除课程
+    usecase 管理教学资源
+    usecase 上传教学资源
+    usecase 删除教学资源
+    usecase 修改教学资源
+    usecase 查看教学资源
+    管理教学资源 ..> 上传教学资源 : <<include>>
+    管理教学资源 ..> 删除教学资源 : <<include>>
+    管理教学资源 ..> 修改教学资源 : <<include>>
+    管理教学资源 ..> 查看教学资源 : <<include>>
+
+
+    usecase 查看课程信息
+    usecase 修改课程信息
+    管理课程 ..> 新建课程 : <<include>>
+    管理课程 ..> 删除课程 : <<include>>
+    管理课程 ..> 查看课程信息 : <<include>>
+    管理课程 ..> 修改课程信息 : <<include>>
+
+    管理课程 ..> 管理教学资源 : <<include>>
+}
+
+actor 全社会
+全社会 --> 管理消息
+全社会 --> 管理课程
+全社会 --> 管理个人信息
+全社会 --> 查看学习进度
+全社会 --> 查看心理健康情况
+全社会 --> 查看心情活跃值
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+
+class 相似例题 {
+  -questionId: 字符串
+  -relatedQuestionId: 字符串
+  -similarityScore: 浮点数
+  +findSimilarQuestions(): 相似例题列表
+}
+
+class 现有例题 {
+  -questionId: 字符串
+  -content: 字符串
+  +findSimilarQuestions(questionId: 字符串): 相似例题列表
+}
+
+相似例题 "1" -- "*" 现有例题 : "相似于"
+
+@enduml

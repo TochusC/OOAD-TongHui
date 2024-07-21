@@ -1,0 +1,10 @@
+@startuml
+boundary AccountManagerUI
+boundary AccountServiceAPI
+
+control AccountController
+
+entity Account
+entity Role
+entity AccountStatus
+@enduml

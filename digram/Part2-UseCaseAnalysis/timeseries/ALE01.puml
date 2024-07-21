@@ -1,0 +1,22 @@
+@startuml
+hide footbox
+
+actor User
+
+boundary MessageManagerUI
+boundary MessageServiceAPI
+
+control MessageController
+
+entity Message
+
+User -> MessageManagerUI : Send Message
+MessageManagerUI -> MessageController : sendMessageRequest(messageContent)
+MessageController -> MessageServiceAPI : createMessage(userId, messageContent)
+MessageServiceAPI -> Message : new Message(userId, messageContent)
+Message -> User : associateWithUser()
+MessageServiceAPI -> MessageController : messageSent()
+MessageController -> MessageManagerUI : sendSuccess()
+MessageManagerUI -> User : Message Sent Successfully
+
+@enduml

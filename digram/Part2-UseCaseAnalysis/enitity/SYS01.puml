@@ -1,0 +1,33 @@
+@startuml
+
+class 账号 {
+  -accountId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+  +authenticate(username: 字符串, password: 字符串): 布尔
+  +updateProfile(newUsername: 字符串, newPassword: 字符串, newEmail: 字符串): 布尔
+  +changePassword(currentPassword: 字符串, newPassword: 字符串): 布尔
+  +deactivateAccount(): 布尔
+}
+
+enum 角色 {
+  <<enum>>
+  管理员
+  普通用户
+  访客
+}
+
+enum 账号状态 {
+  <<enum>>
+  激活
+  未激活
+  注销
+}
+
+账号 "1" -- "*" 角色 : "具有"
+账号 "1" -- "*" 账号状态 : "处于"
+
+@enduml

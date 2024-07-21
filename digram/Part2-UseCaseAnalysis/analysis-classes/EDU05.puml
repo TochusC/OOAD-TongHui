@@ -1,0 +1,10 @@
+@startuml
+boundary ReportUI
+
+control ReportController
+
+entity Report
+entity User
+
+left to right direction
+@enduml

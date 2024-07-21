@@ -1,0 +1,11 @@
+@startuml
+boundary MoodLevelUI
+boundary MoodLevelAPI
+
+control MoodLevelController
+
+entity MoodLevel
+entity User
+
+left to right direction
+@enduml

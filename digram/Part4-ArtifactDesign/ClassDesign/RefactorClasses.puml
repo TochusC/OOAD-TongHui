@@ -1,0 +1,375 @@
+@startuml
+left to right direction
+
+interface IAccount {
+  +authenticate(username: 字符串, password: 字符串): 布尔
+  +updateProfile(newUsername: 字符串, newPassword: 字符串, newEmail: 字符串): 布尔
+  +changePassword(currentPassword: 字符串, newPassword: 字符串): 布尔
+  +deactivateAccount(): 布尔
+}
+
+class StandardAccount implements IAccount {
+  -accountId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+}
+
+class AdminAccount implements IAccount {
+  -accountId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+}
+
+interface IAIAssistant {
+  +interactWithUser(userId: 字符串, query: 字符串): 字符串
+  +provideAssistance(): 布尔
+}
+
+class EmoLLMAssistant implements IAIAssistant {
+  -assistantId: 字符串
+  -lastInteraction: 日期时间
+}
+
+class ERNIEAssistant implements IAIAssistant {
+  -assistantId: 字符串
+  -lastInteraction: 日期时间
+}
+
+interface IUserInteraction {
+  +recordInteraction(): 布尔
+  +getInteractionHistory(): 用户交互列表
+}
+
+class TextInteraction implements IUserInteraction {
+  -interactionId: 字符串
+  -userId: 字符串
+  -assistantId: 字符串
+  -query: 字符串
+  -response: 字符串
+  -timestamp: 日期时间
+}
+
+class VoiceInteraction implements IUserInteraction {
+  -interactionId: 字符串
+  -userId: 字符串
+  -assistantId: 字符串
+  -query: 字符串
+  -response: 字符串
+  -timestamp: 日期时间
+}
+
+interface IAccount {
+  +authenticate(username: 字符串, password: 字符串): 布尔
+  +updateProfile(newUsername: 字符串, newPassword: 字符串, newEmail: 字符串): 布尔
+  +changePassword(currentPassword: 字符串, newPassword: 字符串): 布尔
+  +deactivateAccount(): 布尔
+}
+
+class StandardAccount implements IAccount {
+  -accountId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+}
+
+class AdminAccount implements IAccount {
+  -accountId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 账号状态
+}
+
+enum 角色 {
+  <<enum>>
+  管理员
+  普通用户
+  访客
+}
+
+enum 账号状态 {
+  <<enum>>
+  激活
+  未激活
+  注销
+}
+
+interface IAIAssistant {
+  +interactWithUser(userId: 字符串, query: 字符串): 字符串
+  +provideAssistance(): 布尔
+}
+
+class EmoLLMAssistant implements IAIAssistant {
+  -assistantId: 字符串
+  -lastInteraction: 日期时间
+}
+
+class ERNIEAssistant implements IAIAssistant {
+  -assistantId: 字符串
+  -lastInteraction: 日期时间
+}
+
+interface IMessage {
+  +sendMessage(): 布尔
+  +readMessage(): 布尔
+  +deleteMessage(): 布尔
+}
+
+class TextMessage implements IMessage {
+  -messageId: 字符串
+  -senderId: 字符串
+  -receiverId: 字符串
+  -content: 字符串
+  -timestamp: 日期时间
+  -status: 消息状态
+}
+
+class ImageMessage implements IMessage {
+  -messageId: 字符串
+  -senderId: 字符串
+  -receiverId: 字符串
+  -content: 字符串
+  -timestamp: 日期时间
+  -status: 消息状态
+}
+
+interface IPersonalInfo {
+  +updateInfo(): 布尔
+  +retrieveInfo(): 个人信息
+}
+
+class BasicPersonalInfo implements IPersonalInfo {
+  -userId: 字符串
+  -firstName: 字符串
+  -lastName: 字符串
+  -dateOfBirth: 日期
+  -phoneNumber: 字符串
+  -address: 字符串
+}
+
+interface IProgress {
+  +updateProgress(): 布尔
+  +getProgress(): 学习进度
+}
+
+class CourseProgress implements IProgress {
+  -progressId: 字符串
+  -userId: 字符串
+  -courseId: 字符串
+  -progress: 浮点数
+  -lastUpdated: 日期时间
+}
+
+interface ICourse {
+  +enrollCourse(): 布尔
+  +updateCourse(): 布尔
+  +listCourses(): 课程列表
+}
+
+class StandardCourse implements ICourse {
+  -courseId: 字符串
+  -courseName: 字符串
+  -description: 字符串
+  -instructorId: 字符串
+  -startDate: 日期
+  -endDate: 日期
+}
+
+interface ICourseMaterial {
+  +uploadMaterial(): 布尔
+  +downloadMaterial(): 布尔
+}
+
+class CourseMaterial implements ICourseMaterial {
+  -materialId: 字符串
+  -courseId: 字符串
+  -title: 字符串
+  -content: 字符串
+}
+
+interface IAssessment {
+  +submitAssessment(): 布尔
+  +getAssessment(): 评估
+}
+
+class CourseAssessment implements IAssessment {
+  -assessmentId: 字符串
+  -userId: 字符串
+  -courseId: 字符串
+  -score: 浮点数
+  -feedback: 字符串
+}
+
+interface IRecommendedTopic {
+  +recommendTopic(): 推荐题目列表
+}
+
+class TopicRecommendation implements IRecommendedTopic {
+  -topicId: 字符串
+  -description: 字符串
+  -difficultyLevel: 整数
+}
+
+interface ISimilarQuestion {
+  +findSimilarQuestions(): 相似例题列表
+}
+
+class SimilarQuestion implements ISimilarQuestion {
+  -questionId: 字符串
+  -relatedQuestionId: 字符串
+  -similarityScore: 浮点数
+}
+
+interface IExistingQuestion {
+  +findSimilarQuestions(questionId: 字符串): 相似例题列表
+}
+
+class ExistingQuestion implements IExistingQuestion {
+  -questionId: 字符串
+  -content: 字符串
+}
+
+interface IReport {
+  +generateReport(): 报告
+  +downloadReport(): 布尔
+}
+
+class UserReport implements IReport {
+  -reportId: 字符串
+  -userId: 字符串
+  -reportType: 报告类型
+  -content: 字符串
+}
+
+interface IUser {
+  +sendMessage(receiverId: 字符串, content: 字符串): 布尔
+  +receiveMessage(messageId: 字符串): 布尔
+  +deleteMessage(messageId: 字符串): 布尔
+  +managePersonalInfo(newInfo: 个人信息): 布尔
+  +getPersonalInfo(): 个人信息
+  +getProgress(courseId: 字符串): 学习进度
+  +getRecommendedTopics(): 推荐题目列表
+  +submitAssessment(courseId: 字符串): 布尔
+  +getAssessment(assessmentId: 字符串): 评估
+  +generateReport(): 报告
+  +downloadReport(reportId: 字符串): 布尔
+}
+
+class User implements IUser {
+  -userId: 字符串
+  -username: 字符串
+  -password: 字符串
+  -email: 字符串
+  -role: 角色
+  -status: 用户状态
+}
+
+class Teacher extends User {
+  -instructorId: 字符串
+  -name: 字符串
+  -email: 字符串
+  -phoneNumber: 字符串
+  +assignCourse(courseId: 字符串): 布尔
+  +getAssignedCourses(): 课程列表
+}
+
+class Student extends User {
+  -studentId: 字符串
+  -name: 字符串
+  -email: 字符串
+  -enrolledCourses: 课程列表
+  +enrollCourse(courseId: 字符串): 布尔
+  +dropCourse(courseId: 字符串): 布尔
+}
+
+' 继承关系
+User <|-- Teacher
+User <|-- Student
+
+
+' 关联关系
+Teacher "1" -- "*" Course : "授课"
+Student "1" -- "*" Course : "参与"
+Course "1" -- "*" CourseMaterial : "包含"
+User "1" -- "1" Account : "拥有"
+User "1" -- "*" Message : "发送或接收"
+User "1" -- "1" PersonalInfo : "属于"
+User "1" -- "*" CourseProgress : "查看"
+User "1" -- "*" TopicRecommendation : "获取"
+User "1" -- "*" CourseAssessment : "提交或获取"
+User "1" -- "*" UserReport : "生成或下载"
+AIAssistantPackage "1" -- "*" MentalHealthSubsystem : "依赖"
+AIAssistantPackage "1" -- "*" PreventionSubsystem : "依赖"
+AIAssistantPackage "1" -- "*" EducationSubsystem : "依赖"
+AIAssistantPackage "1" -- "*" SystemPackage : "依赖"
+EmoLLMAssistant "1" -- "*" AIAssistantPackage : "实现"
+ERNIEAssistant "1" -- "*" AIAssistantPackage : "实现"
+TextInteraction "1" -- "*" UserInteraction : "实现"
+VoiceInteraction "1" -- "*" UserInteraction : "实现"
+TextMessage "1" -- "*" Message : "实现"
+ImageMessage "1" -- "*" Message : "实现"
+BasicPersonalInfo "1" -- "*" PersonalInfo : "实现"
+CourseProgress "1" -- "*" Progress : "实现"
+StandardCourse "1" -- "*" Course : "实现"
+CourseMaterial "1" -- "*" CourseMaterial : "实现"
+CourseAssessment "1" -- "*" Assessment : "实现"
+TopicRecommendation "1" -- "*" RecommendedTopic : "实现"
+SimilarQuestion "1" -- "*" SimilarQuestion : "实现"
+ExistingQuestion "1" -- "*" ExistingQuestion : "实现"
+UserReport "1" -- "*" Repo
+
+interface IPsychologicalHealth {
+  +detectMentalHealth(): 布尔
+  +trackMentalHealth(): 心理健康记录列表
+}
+
+class MentalHealthDetector implements IPsychologicalHealth {
+  -detectorId: 字符串
+  -lastDetection: 日期时间
+  +detectMentalHealth(userId: 字符串): 布尔
+  +trackMentalHealth(userId: 字符串): 心理健康记录列表
+}
+
+class MentalHealthRecord {
+  -recordId: 字符串
+  -userId: 字符串
+  -detectorId: 字符串
+  -healthStatus: 心理健康状态
+  -timestamp: 日期时间
+}
+
+interface IMoodActivity {
+  +measureMoodActivity(): 浮点数
+  +logMoodActivity(): 布尔
+}
+
+class MoodActivityMeasurer implements IMoodActivity {
+  -measurerId: 字符串
+  -lastMeasurement: 日期时间
+  +measureMoodActivity(userId: 字符串): 浮点数
+  +logMoodActivity(userId: 字符串, moodLevel: 浮点数): 布尔
+}
+
+class MoodActivityLog {
+  -logId: 字符串
+  -userId: 字符串
+  -measurerId: 字符串
+  -moodLevel: 浮点数
+  -timestamp: 日期时间
+}
+
+User "1" -- "*" MentalHealthDetector : "接受心理健康检测"
+User "1" -- "*" MoodActivityMeasurer : "接受心情活跃度测量"
+MentalHealthDetector "1" -- "*" MentalHealthRecord : "记录心理健康状态"
+MoodActivityMeasurer "1" -- "*" MoodActivityLog : "记录心情活跃度"
+
+@enduml

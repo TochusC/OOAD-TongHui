@@ -1,0 +1,22 @@
+@startuml
+hide footbox
+
+actor User
+
+boundary PersonalInfoManagerUI
+boundary PersonalInfoServiceAPI
+
+control PersonalInfoController
+
+entity PersonalInfo
+
+User -> PersonalInfoManagerUI : Update Personal Info
+PersonalInfoManagerUI -> PersonalInfoController : updatePersonalInfoRequest(newInfo)
+PersonalInfoController -> PersonalInfoServiceAPI : updatePersonalInfo(userId, newInfo)
+PersonalInfoServiceAPI -> PersonalInfo : setPersonalInfo(newInfo)
+PersonalInfo -> User : updateAssociatedInfo()
+PersonalInfoServiceAPI -> PersonalInfoController : updateSuccess()
+PersonalInfoController -> PersonalInfoManagerUI : updateSuccessResponse()
+PersonalInfoManagerUI -> User : Personal Info Updated Successfully
+
+@enduml

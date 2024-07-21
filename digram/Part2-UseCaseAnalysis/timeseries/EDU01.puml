@@ -1,0 +1,23 @@
+@startuml
+hide footbox
+
+actor User
+
+boundary LearningProgressUI
+boundary LearningProgressAPI
+
+control LearningProgressController
+
+entity LearningProgress
+entity Course
+
+User -> LearningProgressUI : View Learning Progress
+LearningProgressUI -> LearningProgressController : getLearningProgressRequest(courseId)
+LearningProgressController -> LearningProgressAPI : fetchLearningProgress(userId, courseId)
+LearningProgressAPI -> LearningProgress : getProgressForUserAndCourse()
+LearningProgress -> Course : getCourseDetails()
+LearningProgressAPI -> LearningProgressController : sendLearningProgress(progressDetails)
+LearningProgressController -> LearningProgressUI : displayLearningProgress(progressDetails)
+LearningProgressUI -> User : Show Learning Progress
+
+@enduml
